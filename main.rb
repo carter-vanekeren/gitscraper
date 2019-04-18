@@ -35,23 +35,14 @@ while !quit do
 		quit = true
 		puts "Have a great day!"
 	when "show all"
-		factor = 0
-		while factor < 5 do
-			gitscraper.show_five(factor)
-			factor += 1
-		end
+		gitscraper.show_all()
 	when "show more"
 		gitscraper.show_five(factor)
 		factor += 1
 	when /(visit\s\d+)/
 		# Get integer from regular expression
 		index = command[/\d+/].to_i - 1
-		if index > 24
-			puts "Visit requires a valid number (1-25) as an argument"
-		else
-			# Open repo in default browser
-			gitscraper.visitPage(index)
-		end
+		gitscraper.visitPage(index)
 	else
 		puts "I do not recognize that command."
 		puts "Type 'help' for command options."

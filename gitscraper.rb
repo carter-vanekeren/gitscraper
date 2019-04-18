@@ -1,5 +1,3 @@
-require 'nokogiri'
-require 'httparty'
 require 'launchy'
 load 'scraper.rb'
 
@@ -28,16 +26,29 @@ class GitScraper < Scraper
 
 		while start < (factor + 1) * 5 do
 			# Output repo information
+			puts "================================================="
 			puts "#{start+1}:  Repo Name: #{@results[start][:name]}"
 			puts "    Description: #{@results[start][:description]}"
 			puts "    Language: #{@results[start][:language]}"
 			puts "    Link: #{@results[start][:link]}"
-			puts "\n"
+			puts "================================================="
 			start += 1
 		end
 	end
 
+	def show_all()
+		factor = 0
+		while factor < 5 do
+			show_five(0)
+			factor += 1
+		end
+	end
+
 	def visitPage(index)
-		Launchy.open(@results[index][:link])
+		if index > 24
+			puts "Visit requires a valid number (1-25) as an argument"
+		else
+			Launchy.open(@results[index][:link])
+		end
 	end
 end
