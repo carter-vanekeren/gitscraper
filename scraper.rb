@@ -3,7 +3,7 @@ require 'httparty'
 
 class Scraper
 
-	attr_reader :results
+	attr_reader :results, :name
 	@@scrapers = Array.new
 	def initialize (url, name)
 		@url = url
