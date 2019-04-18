@@ -1,4 +1,3 @@
-require 'launchy'
 load 'gitscraper.rb'
 
 # Set exit variable
