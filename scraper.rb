@@ -6,11 +6,11 @@ class Scraper
 	attr_reader :results, :name
 	@@scrapers = Array.new
 	def initialize (url, name)
+		@position = 0 # position in results list
 		@url = url
 		@name = name
 		@results = Array.new
 		@@scrapers << self
-
 	end
 
 	def setUp()
@@ -21,4 +21,5 @@ class Scraper
 	def getScrapers()
 		@@scrapers
 	end
+
 end

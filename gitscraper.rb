@@ -15,16 +15,16 @@ class GitScraper < Scraper
 		end
 		puts "GitScraper$ Hello! I have found #{@results.count} trending GitHub Repositories."
 		puts "GitScraper$ Here are the top 5:"
-		show_five(0)
+		show_five()
 	end
 
-	def show_five(factor)
-		if factor > 4
-			factor = factor % 5
+	def show_five()
+		if @position > 4
+			@position = @position % 5
 		end
-		start = factor * 5
+		start = @position * 5
 
-		while start < (factor + 1) * 5 do
+		while start < (@position + 1) * 5 do
 			# Output repo information
 			puts "================================================="
 			puts "#{start+1}:  Repo Name: #{@results[start][:name]}"
@@ -34,13 +34,13 @@ class GitScraper < Scraper
 			puts "================================================="
 			start += 1
 		end
+		@position += 1
 	end
 
 	def show_all()
-		factor = 0
-		while factor < 5 do
-			show_five(0)
-			factor += 1
+		@position = 0
+		while @position < 5 do
+			show_five()
 		end
 	end
 

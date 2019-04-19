@@ -15,20 +15,17 @@ The following are accepted commands:
   	          (number is displayed next to the name of repo)
  =================================================="
 
-# Variable used for showing repos, keeps track of what we have already seen
-# in the list of scraped repos
-factor = 0
-
-# Set up GItScraper and scrape page
+# Set up GitScraper and scrape page
 gitscraper = GitScraper.new("https://github.com/trending", "GitScraper")
 gitscraper.setUp
 gitscraper.scrape
-factor += 1
 
 # Enter command loop
 puts "GitScraper$ What would you like to do? (type 'help' for commands)\n"
 while !quit do
+	# Command prompt
 	print "GitScraper$ "
+	# Get command and decide what to do with it
 	command = gets.strip
 	case command
 	when "help"
@@ -39,9 +36,8 @@ while !quit do
 	when "show all"
 		gitscraper.show_all()
 	when "show more"
-		gitscraper.show_five(factor)
-		factor += 1
-	when /(visit\s\d+)/
+		gitscraper.show_five()
+	when /(visit\s\d+)/ # Regex with format 'visit (some number)'
 		# Get integer from regular expression
 		index = command[/\d+/].to_i - 1
 		gitscraper.visitPage(index)
