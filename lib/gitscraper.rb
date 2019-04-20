@@ -67,14 +67,12 @@ class GitScraper < Scraper
 			# Open file and read contents for json parsing
 			file = File.open('favorite_repos.json', 'r')
 			content = file.read
-			file.close
 			favorites = JSON.parse(content)
 			# Add repo to the parsed json
 			favorites["repos"] << repo
 			# Write modified json to file
-			File.open('favorite_repos.json', 'w') do |f|
-				f.write(favorites.to_json)
-			end
+			file.write(favorites.to_json)
+
 			file.close
 		end
 	end
