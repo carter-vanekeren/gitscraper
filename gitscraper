@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-load 'gitscraper.rb'
+load 'lib/gitscraper.rb'
 
 # Set exit variable
 quit = false
