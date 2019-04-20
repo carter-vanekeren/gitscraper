@@ -35,8 +35,9 @@ puts "GitScraper$ What would you like to do? (type 'help' for commands)\n"
 while !quit do
 	# Command prompt
 	print "GitScraper$ "
-	# Get command and decide what to do with it
+	# Get command
 	command = gets.strip
+	# Decide what to do with it
 	case command
 	when "help"
 		puts help
@@ -54,7 +55,7 @@ while !quit do
 	when /(save\s\d+)/ #Regex with format 'save (repo number)'
 		# Get integer from regular expression
 		index = command[/\d+/].to_i - 1
-		gitscraper.save_repo(index)
+		gitscraper.save(index)
 	else
 		puts "I do not recognize that command."
 		puts "Type 'help' for command options."

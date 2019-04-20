@@ -16,11 +16,9 @@ class GitScraper < Scraper
 				description: repo.css('p').text.strip,
 				language: repo.css("span[itemprop='programmingLanguage']").text.strip
 			}
-
 			@scrape_results << new
 		end
 		puts "GitScraper$ Hello! I have found #{@scrape_results.count} trending GitHub Repositories."
-
 		puts "GitScraper$ Here are the top 5:"
 		show_five()
 	end
@@ -30,11 +28,9 @@ class GitScraper < Scraper
 			@position = @position % 5
 		end
 		start = @position * 5
-
 		while start < (@position + 1) * 5 do
 			# Output repo information
 			puts "================================================="
-
 			puts "#{start+1}:  Repo Name: #{@scrape_results[start][:name]}"
 			puts "    Description: #{@scrape_results[start][:description]}"
 			puts "    Language: #{@scrape_results[start][:language]}"
@@ -53,7 +49,7 @@ class GitScraper < Scraper
 		end
 	end
 
-	def save_repo(index)
+	def save(index)
 		if index > 24
 			puts "Saving a repo requires a valid number (1-25) as an argument"
 		else
@@ -72,7 +68,6 @@ class GitScraper < Scraper
 			favorites["repos"] << repo
 			# Write modified json to file
 			file.write(favorites.to_json)
-
 			file.close
 		end
 	end

@@ -46,4 +46,6 @@ class Scraper
 	def visitPage(index)
 	end
 	
+	def save(index)
+	end
 end
