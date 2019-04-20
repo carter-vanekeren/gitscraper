@@ -57,17 +57,21 @@ class GitScraper < Scraper
 		if index > 24
 			puts "Saving a repo requires a valid number (1-25) as an argument"
 		else
+			# Store repo of interest in a hash
 			repo = {
 				"Name" => "#{@scrape_results[index][:name]}",
 				"Description" => "#{@scrape_results[index][:description]}",
 				"Language" => "#{@scrape_results[index][:language]}",
 				"Link" => "#{@scrape_results[index][:link]}"
 			}
+			# Open file and read contents for json parsing
 			file = File.open('favorite_repos.json', 'r')
 			content = file.read
 			file.close
 			favorites = JSON.parse(content)
+			# Add repo to the parsed json
 			favorites["repos"] << repo
+			# Write modified json to file
 			File.open('favorite_repos.json', 'w') do |f|
 				f.write(favorites.to_json)
 			end
