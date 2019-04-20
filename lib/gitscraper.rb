@@ -3,11 +3,10 @@
 # Email : vanek015@umn.edu
 # File : gitscraper.rb									         #
 ################################################################################
+require 'json'
 load 'lib/scraper.rb'
 
 class GitScraper < Scraper
-	# File to save favorite repos in
-	@favorites = 'favorite_repos.txt'
 	def scrape()
 		trending = @parsed_page.css('li.py-4')
 		trending.each do |repo|
@@ -54,5 +53,25 @@ class GitScraper < Scraper
 		end
 	end
 
-
+	def save_repo(index)
+		if index > 24
+			puts "Saving a repo requires a valid number (1-25) as an argument"
+		else
+			repo = {
+				"Name" => "#{@scrape_results[index][:name]}",
+				"Description" => "#{@scrape_results[index][:description]}",
+				"Language" => "#{@scrape_results[index][:language]}",
+				"Link" => "#{@scrape_results[index][:link]}"
+			}
+			file = File.open('favorite_repos.json', 'r')
+			content = file.read
+			file.close
+			favorites = JSON.parse(content)
+			favorites["repos"] << repo
+			File.open('favorite_repos.json', 'w') do |f|
+				f.write(favorites.to_json)
+			end
+			file.close
+		end
+	end
 end

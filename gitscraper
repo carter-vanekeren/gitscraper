@@ -22,6 +22,7 @@ The following are accepted commands:
   show all       : Show all trending repos
   visit <number> : Open GitHub repository in default browser
   	          (number is displayed next to the name of repo)
+  save <number>  : Save repo to favorites
  =================================================="
 
 # Set up GitScraper and scrape page
@@ -46,10 +47,14 @@ while !quit do
 		gitscraper.show_all()
 	when "show more"
 		gitscraper.show_five()
-	when /(visit\s\d+)/ # Regex with format 'visit (some number)'
+	when /(visit\s\d+)/ # Regex with format 'visit (repo number)'
 		# Get integer from regular expression
 		index = command[/\d+/].to_i - 1
 		gitscraper.visitPage(index)
+	when /(save\s\d+)/ #Regex with format 'save (repo number)'
+		# Get integer from regular expression
+		index = command[/\d+/].to_i - 1
+		gitscraper.save_repo(index)
 	else
 		puts "I do not recognize that command."
 		puts "Type 'help' for command options."
