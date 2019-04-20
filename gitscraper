@@ -1,8 +1,4 @@
 #!/usr/bin/env ruby
-<<<<<<< HEAD
-load 'lib/gitscraper.rb'
-
-=======
 ################################################################################
 # Copyright Carter Van Ekeren - 2019								    #
 # Email : vanek015@umn.edu
@@ -13,7 +9,7 @@ load 'lib/gitscraper.rb'
 ################################################################################
 # Main program driver											    #
 ################################################################################
->>>>>>> refactor/scraper
+
 # Set exit variable
 quit = false
 # Set help string

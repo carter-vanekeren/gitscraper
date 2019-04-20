@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-require 'nokogiri'
-require 'httparty'
-
-class Scraper
-
-	attr_reader :results, :name
-	@@scrapers = Array.new
-	def initialize (url, name)
-		@position = 0 # position in results list
-		@url = url
-		@name = name
-		@results = Array.new
-		@@scrapers << self
-=======
 ################################################################################
 # Copyright Carter Van Ekeren - 2019								    #
 # Email : vanek015@umn.edu
@@ -35,7 +20,6 @@ class Scraper
 		@url = url
 		@name = name
 		@scrape_results = Array.new
->>>>>>> refactor/scraper
 	end
 
 	def setUp()
@@ -43,12 +27,6 @@ class Scraper
 		@parsed_page = Nokogiri::HTML(page)
 	end
 
-	def getScrapers()
-		@@scrapers
-	end
-
-<<<<<<< HEAD
-=======
 	def show_all()
 		@position = 0
 		while @position < 5 do
@@ -67,7 +45,5 @@ class Scraper
 
 	def visitPage(index)
 	end
-
-
->>>>>>> refactor/scraper
+	
 end
