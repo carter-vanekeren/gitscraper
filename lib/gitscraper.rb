@@ -65,7 +65,7 @@ class GitScraper < Scraper
 				"Link" => "#{@scrape_results[index][:link]}"
 			}
 			# Open file and read contents for json parsing
-			file = File.open('favorite_repos.json', 'r')
+			file = File.open('saved/favorite_repos.json', 'r')
 			content = file.read
 			favorites = JSON.parse(content)
 			# Add repo to the parsed json
