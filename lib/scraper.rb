@@ -27,7 +27,7 @@ class Scraper
 		@parsed_page = Nokogiri::HTML(page)
 	end
 
-	def show_all()
+	def showAll()
 		@position = 0
 		while @position < 5 do
 			show_five()
@@ -45,7 +45,7 @@ class Scraper
 
 	def visitPage(index)
 	end
-	
+
 	def save(index)
 	end
 end

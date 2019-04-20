@@ -1,7 +1,7 @@
 ################################################################################
 # Copyright Carter Van Ekeren - 2019								    #
-# Email : vanek015@umn.edu
-# File : gitscraper.rb									         #
+# Email : vanek015@umn.edu										    #
+# File : gitscraper.rb									              #
 ################################################################################
 require 'json'
 load 'lib/scraper.rb'
@@ -20,10 +20,10 @@ class GitScraper < Scraper
 		end
 		puts "GitScraper$ Hello! I have found #{@scrape_results.count} trending GitHub Repositories."
 		puts "GitScraper$ Here are the top 5:"
-		show_five()
+		showFive()
 	end
 
-	def show_five()
+	def showFive()
 		if @position > 4
 			@position = @position % 5
 		end
