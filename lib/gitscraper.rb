@@ -1,4 +1,8 @@
-require 'launchy'
+################################################################################
+# Copyright Carter Van Ekeren - 2019								    #
+# Email : vanek015@umn.edu
+# File : gitscraper.rb									         #
+################################################################################
 load 'lib/scraper.rb'
 
 class GitScraper < Scraper
@@ -11,9 +15,9 @@ class GitScraper < Scraper
 				description: repo.css('p').text.strip,
 				language: repo.css("span[itemprop='programmingLanguage']").text.strip
 			}
-			@results << new
+			@scrape_results << new
 		end
-		puts "GitScraper$ Hello! I have found #{@results.count} trending GitHub Repositories."
+		puts "GitScraper$ Hello! I have found #{@scrape_results.count} trending GitHub Repositories."
 		puts "GitScraper$ Here are the top 5:"
 		show_five()
 	end
@@ -27,28 +31,21 @@ class GitScraper < Scraper
 		while start < (@position + 1) * 5 do
 			# Output repo information
 			puts "================================================="
-			puts "#{start+1}:  Repo Name: #{@results[start][:name]}"
-			puts "    Description: #{@results[start][:description]}"
-			puts "    Language: #{@results[start][:language]}"
-			puts "    Link: #{@results[start][:link]}"
+			puts "#{start+1}:  Repo Name: #{@scrape_results[start][:name]}"
+			puts "    Description: #{@scrape_results[start][:description]}"
+			puts "    Language: #{@scrape_results[start][:language]}"
+			puts "    Link: #{@scrape_results[start][:link]}"
 			puts "================================================="
 			start += 1
 		end
 		@position += 1
 	end
 
-	def show_all()
-		@position = 0
-		while @position < 5 do
-			show_five()
-		end
-	end
-
 	def visitPage(index)
 		if index > 24
 			puts "Visit requires a valid number (1-25) as an argument"
 		else
-			Launchy.open(@results[index][:link])
+			Launchy.open(@scrape_results[index][:link])
 		end
 	end
 end
