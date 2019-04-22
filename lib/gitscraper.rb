@@ -63,7 +63,9 @@ class GitScraper < Scraper
 			# Open file and read contents for json parsing
 			file = File.open('saved/favorite_repos.json', 'r')
 			content = file.read
+			file.close
 			favorites = JSON.parse(content)
+			file = File.open('saved/favorite_repos.json', 'w')
 			# Add repo to the parsed json
 			favorites["repos"] << repo
 			# Write modified json to file

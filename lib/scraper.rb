@@ -30,7 +30,7 @@ class Scraper
 	def showAll()
 		@position = 0
 		while @position < 5 do
-			show_five()
+			showFive()
 		end
 	end
 
