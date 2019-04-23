@@ -1,7 +1,7 @@
 ################################################################################
 # Copyright Carter Van Ekeren - 2019								    #
-# Email : vanek015@umn.edu
-# File : scraper.rb								         #
+# Email : vanek015@umn.edu										    #
+# File : scraper.rb								                        #
 ################################################################################
 require 'nokogiri'
 require 'httparty'
