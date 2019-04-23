@@ -19,26 +19,48 @@ help =
 The following are accepted commands:
   quit           : Exit the program
   help           : Show all available commands
-  show more      : Show five more trending repos
-  show all       : Show all trending repos
-  visit <number> : Open GitHub repository in default browser
+  jobscraper     : Use JobScraper
+  gitscraper     : Use GitScraper
+  show more      : Show five more items
+  show all       : Show all items
+  visit <number> : Open link associtaed with item in default browser
   	          (number is displayed next to the name of repo)
                    Also works when in favorites mode
   save <number>  : Save item to favorites
-  favorites      : View saved repos, enters favorites mode
+  favorites      : View saved items, enters favorites mode
   exit favorites : Exit favorites mode
  =================================================="
 
-# Set up GitScraper and scrape page
-gitscraper = GitScraper.new("https://github.com/trending", "GitScraper")
-gitscraper.setUp
-gitscraper.scrape
+ def initScraper(scrapertype)
+ 	if scrapertype == "gitscraper"
+ 		current_scraper = GitScraper.new("https://github.com/trending", "GitScraper")
+ 		current_scraper.setUp
+ 		current_scraper.scrape
+ 		return current_scraper
+ 	elsif scrapertype == "jobscraper"
+ 		current_scraper = JobScraper.new("https://www.linkedin.com/jobs/search/?currentJobId=1236685883&f_E=1%2C2&f_TPR=r2592000&keywords=software&location=Appleton%2C%20Wisconsin&locationId=PLACES.us.1-5-0-45-1&sortBy=R","JobScraper")
+ 		current_scraper.setUp
+ 		current_scraper.scrape
+ 		return current_scraper
+ 	end
+ end
+
+ def getScraperType()
+ 	puts "Please select a scraper to use: "
+ 	puts "gitscraper"
+ 	puts "jobscraper "
+	print "Scraper$ "
+ 	scrapertype = gets.strip
+ end
+# Set up Scraper
+scrapertype = getScraperType()
+current_scraper = initScraper(scrapertype)
 
 # Enter command loop
-puts "GitScraper$ What would you like to do? (type 'help' for commands)\n"
+puts "Scraper$ What would you like to do? (type 'help' for commands)\n"
 while !quit do
 	# Command prompt
-	print "GitScraper$ "
+	print "Scraper$ "
 	# Get command
 	command = gets.strip
 	# Decide what to do with it
@@ -48,22 +70,28 @@ while !quit do
 	when "quit"
 		quit = true
 		puts "Have a great day!"
+	when "gitscraper"
+		puts "You are now using GitScraper"
+		current_scraper = initScraper("gitscraper")
+	when "jobscraper"
+		puts "You are now using JobScraper"
+		current_scraper = initScraper("jobscraper")
 	when "show all"
-		gitscraper.showAll()
+		current_scraper.showAll()
 		favorites = false
 	when "show more"
-		gitscraper.showFive()
+		current_scraper.showFive()
 		favorites = false
 	when /(visit\s\d+)/ # Regex with format 'visit (repo number)'
 		# Get integer from regular expression
 		index = command[/\d+/].to_i - 1
-		gitscraper.visitPage(index, favorites)
+		current_scraper.visitPage(index, favorites)
 	when /(save\s\d+)/ #Regex with format 'save (repo number)'
 		# Get integer from regular expression
 		index = command[/\d+/].to_i - 1
-		gitscraper.save(index)
+		current_scraper.save(index)
 	when "favorites"
-		gitscraper.viewSaved()
+		current_scraper.viewSaved()
 		favorites = true
 		puts "**************YOU ARE IN FAVORITES MODE**************"
 		puts "TO EXIT THIS MODE TYPE 'exit favorites'"
@@ -78,4 +106,26 @@ while !quit do
 		puts "I do not recognize that command."
 		puts "Type 'help' for command options."
 	end
+end
+
+
+def initScraper(scrapertype)
+	if scrapertype == "gitscraper"
+		current_scraper = GitScraper.new("https://github.com/trending", "GitScraper")
+		current_scraper.setUp
+		current_scraper.scrape
+		return current_scraper
+	elsif scrapertype == "jobscraper"
+		current_scraper = JobScraper.new("https://www.linkedin.com/jobs/search/?currentJobId=1236685883&f_E=1%2C2&f_TPR=r2592000&keywords=software&location=Appleton%2C%20Wisconsin&locationId=PLACES.us.1-5-0-45-1&sortBy=R","JobScraper")
+		current_scraper.setUp
+		current_scraper.scrape
+		return current_scraper
+	end
+end
+
+def getScraperType()
+	puts "Please select a scraper to use: "
+	puts "gitscraper"
+	puts "jobscraper "
+	scrapertype = gets.strip
 end
