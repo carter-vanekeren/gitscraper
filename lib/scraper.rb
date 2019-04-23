@@ -43,9 +43,12 @@ class Scraper
 	def show_five()
 	end
 
-	def visitPage(index)
+	def visitPage(index, favorites)
 	end
 
 	def save(index)
+	end
+
+	def viewSaved()
 	end
 end

@@ -12,6 +12,7 @@ load 'lib/gitscraper.rb'
 
 # Set exit variable
 quit = false
+favorites = false
 # Set help string
 help =
 "==================================================
@@ -22,7 +23,10 @@ The following are accepted commands:
   show all       : Show all trending repos
   visit <number> : Open GitHub repository in default browser
   	          (number is displayed next to the name of repo)
+                   Also works when in favorites mode
   save <number>  : Save item to favorites
+  favorites      : View saved repos, enters favorites mode
+  exit favorites : Exit favorites mode
  =================================================="
 
 # Set up GitScraper and scrape page
@@ -46,16 +50,30 @@ while !quit do
 		puts "Have a great day!"
 	when "show all"
 		gitscraper.showAll()
+		favorites = false
 	when "show more"
 		gitscraper.showFive()
+		favorites = false
 	when /(visit\s\d+)/ # Regex with format 'visit (repo number)'
 		# Get integer from regular expression
 		index = command[/\d+/].to_i - 1
-		gitscraper.visitPage(index)
+		gitscraper.visitPage(index, favorites)
 	when /(save\s\d+)/ #Regex with format 'save (repo number)'
 		# Get integer from regular expression
 		index = command[/\d+/].to_i - 1
 		gitscraper.save(index)
+	when "favorites"
+		gitscraper.viewSaved()
+		favorites = true
+		puts "**************YOU ARE IN FAVORITES MODE**************"
+		puts "TO EXIT THIS MODE TYPE 'exit favorites'"
+	when "exit favorites"
+		if favorites
+			favorites = false
+			puts "************YOU HAVE EXITED FAVORITES MODE************"
+		else
+			puts "You are not currently in favorites mode."
+		end
 	else
 		puts "I do not recognize that command."
 		puts "Type 'help' for command options."

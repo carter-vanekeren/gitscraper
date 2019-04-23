@@ -41,12 +41,18 @@ class GitScraper < Scraper
 		@position += 1
 	end
 
-	def visitPage(index)
-		if index > 24
-			puts "Visit requires a valid number (1-25) as an argument"
+	def visitPage(index, favorites)
+		if favorites
+			saved = getJSON()
+			Launchy.open(saved["repos"][index]["Link"])
 		else
-			Launchy.open(@scrape_results[index][:link])
+			if index > 24
+				puts "Visit requires a valid number (1-25) as an argument"
+			else
+				Launchy.open(@scrape_results[index][:link])
+			end
 		end
+
 	end
 
 	def save(index)
@@ -61,10 +67,7 @@ class GitScraper < Scraper
 				"Link" => "#{@scrape_results[index][:link]}"
 			}
 			# Open file and read contents for json parsing
-			file = File.open('saved/favorite_repos.json', 'r')
-			content = file.read
-			file.close
-			favorites = JSON.parse(content)
+			favorites = getJSON()
 			file = File.open('saved/favorite_repos.json', 'w')
 			# Add repo to the parsed json
 			favorites["repos"] << repo
@@ -72,5 +75,22 @@ class GitScraper < Scraper
 			file.write(favorites.to_json)
 			file.close
 		end
+	end
+
+	def viewSaved()
+		# Open file and read contents for json parsing
+		saved = getJSON()
+		number = 1
+		saved["repos"].each do |repo|
+			puts "#{number}. #{repo["Name"]}"
+			number += 1
+		end
+	end
+
+	def getJSON()
+		file = File.open('saved/favorite_repos.json', 'r')
+		content = file.read
+		file.close
+		saved = JSON.parse(content)
 	end
 end
