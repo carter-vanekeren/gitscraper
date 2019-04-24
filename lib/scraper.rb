@@ -6,6 +6,7 @@
 require 'nokogiri'
 require 'httparty'
 require 'launchy'
+require 'json'
 ################################################################################
 # 'Abstract' Webscraper class -                                                #
 # All webscrapers must have the functionality conatined in this class          #

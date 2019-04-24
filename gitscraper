@@ -5,7 +5,7 @@
 # File : main.rb/gitscraper							                   #
 ################################################################################
 load 'lib/gitscraper.rb'
-
+load 'lib/jobscraper.rb'
 ################################################################################
 # Main program driver											    #
 ################################################################################
@@ -38,7 +38,7 @@ The following are accepted commands:
  		current_scraper.scrape
  		return current_scraper
  	elsif scrapertype == "jobscraper"
- 		current_scraper = JobScraper.new("https://www.linkedin.com/jobs/search/?currentJobId=1236685883&f_E=1%2C2&f_TPR=r2592000&keywords=software&location=Appleton%2C%20Wisconsin&locationId=PLACES.us.1-5-0-45-1&sortBy=R","JobScraper")
+ 		current_scraper = JobScraper.new("https://www.glassdoor.com/Job/jobs.htm?suggestCount=0&suggestChosen=true&clickSource=searchBtn&typedKeyword=Software&sc.keyword=Software+Developer&locT=C&locId=1133289&jobType=","JobScraper")
  		current_scraper.setUp
  		current_scraper.scrape
  		return current_scraper

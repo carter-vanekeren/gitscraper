@@ -3,7 +3,6 @@
 # Email : vanek015@umn.edu										    #
 # File : gitscraper.rb									              #
 ################################################################################
-require 'json'
 load 'lib/scraper.rb'
 
 class GitScraper < Scraper
