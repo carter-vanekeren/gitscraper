@@ -7,7 +7,7 @@ This has only been tested on MacOSX.
 Ruby 2.6.3 - If you need to update: 
 http://codingpad.maryspad.com/2017/04/29/update-mac-os-x-to-the-current-version-of-ruby/
 
-You will need the follwoing gems installed and up to date: 
+You will need the following gems installed and up to date: 
 - nokogiri
 - launchy
 - httparty
@@ -22,7 +22,7 @@ If you need some help with installing/updating gems:
 https://guides.rubygems.org/rubygems-basics/
 
 
-## To run 
+### To run 
 $ bundle install
 
 $ bin/gitscraper
