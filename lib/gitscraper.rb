@@ -4,7 +4,7 @@
 # File : gitscraper.rb									              #
 ################################################################################
 require 'json'
-load 'lib/scraper.rb'
+require_relative 'scraper.rb'
 
 class GitScraper < Scraper
 	def scrape()
