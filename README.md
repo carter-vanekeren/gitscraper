@@ -1,5 +1,5 @@
 # GitScraper
-GitScraper is small command-line application that scrapes the top 25 trending GitHub repositories.
+GitScraper is a small command-line application that scrapes the top 25 trending GitHub repositories.
 Once scraped, you can execute several commands to save, visit or show more trending repos.
 
 ## Design
