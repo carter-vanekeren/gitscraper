@@ -44,6 +44,7 @@ You will need the following gems installed and up to date:
 - bundler 
 ##### To update/install gems 
 You will need RubyGems installed first - [Install instructions](https://www.vultr.com/docs/how-to-install-rubygems-on-linux)
+
 Once installed...
 ```
 gem update --system
