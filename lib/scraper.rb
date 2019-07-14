@@ -25,6 +25,7 @@ class Scraper
 	def setUp()
 		page = HTTParty.get(@url)
 		@parsed_page = Nokogiri::HTML(page)
+		# puts(@parsed_page)
 	end
 
 	def showAll()

@@ -8,11 +8,11 @@ require_relative 'scraper.rb'
 
 class GitScraper < Scraper
 	def scrape()
-		trending = @parsed_page.css('li.py-4')
+		trending = @parsed_page.css('body > div.application-main > main > div.explore-pjax-container.container-lg.p-responsive.pt-6 > div > div > article')
 		trending.each do |repo|
 			new = {
-				name: repo.css('a')[0].attributes["href"].value.strip[1..-1],
-			     link: "https://github.com" + repo.css('a')[0].attributes["href"].value.strip,
+				name: repo.css('h1 > a')[0].text.strip,
+			     link: "https://github.com" + repo.css('h1 > a')[0].attributes["href"].value.strip,
 				description: repo.css('p').text.strip,
 				language: repo.css("span[itemprop='programmingLanguage']").text.strip
 			}
